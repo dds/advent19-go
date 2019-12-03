@@ -1,13 +1,10 @@
 package main
 
 import (
-	"bufio"
-	"bytes"
-	"fmt"
 	"io/ioutil"
 	"log"
 	"math"
-	"strconv"
+	"strings"
 )
 
 func fuel(module int64) int64 {
@@ -19,17 +16,7 @@ func main() {
 	if err != nil {
 		log.Fatal(err)
 	}
-	s := bufio.NewScanner(bytes.NewBuffer(content))
-	var total int64
-	for s.Scan() {
-		i, err := strconv.ParseInt(s.Text(), 10, 64)
-		if err != nil {
-			log.Fatal(err)
-		}
-		for fuel(i) > 0 {
-			total = total + fuel(i)
-			i = fuel(i)
-		}
-	}
-	fmt.Println(total)
+	data := strings.Split(string(content), ",")
+	data[1] = "12"
+	data[2] = "2"
 }
